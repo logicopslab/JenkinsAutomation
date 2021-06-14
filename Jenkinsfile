@@ -2,14 +2,24 @@ pipeline {
     agent any
 
     stages {
-        stage('FirstBatch') {
+        stage('First') {
             steps {
-                bat First.bat
+                echo "This is 1st stage"
             }
         }
-        stage('SecondBatch') {
+        stage('Second') {
             steps {
-                bat Second.bat
+                echo "This is 2nd stage"
+            }
+        }
+        stage('Third') {
+            steps {
+                echo "This is 3rd stage"
+            }
+        }
+        stage('Fourth') {
+            steps {
+                echo "This is 4th stage"
             }
         }
     }
