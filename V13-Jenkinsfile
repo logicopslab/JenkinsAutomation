@@ -19,7 +19,7 @@ pipeline {
                 bat 'mvn package'
              }
         }
-		    stage ('Server'){
+	stage ('Server'){
             steps {
                rtServer (
                  id: "Artifactory",
