@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+	tools {
+	    maven "3.6.3"
+	 	}
+	stages {
+	    stage('Git CheckOut') {
+		    steps {
+			   checkout([$class: 'GitSCM', branches: [[name: '*/dragon']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/logicopslab/rock-paper-scissors.git']]])
+			}
+		}
+        stage('Clean and Install') {
+            steps {
+                bat 'mvn clean install'
+            }
+        }
+        stage ('Code Quality'){
+            steps {
+                    withSonarQubeEnv('SonarQube') {
+                bat 'mvn sonar:sonar'
+                }
+             }
+        }
+		
+    }
+}
