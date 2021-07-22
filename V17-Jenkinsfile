@@ -1,24 +1,33 @@
 pipeline {
   agent any
     stages {
-	    stage('First Stage') {
+    	stage('Git CheckOut') {
+		    steps {
+			   git branch: 'main', credentialsId: 'My private token login creds', url: 'https://github.com/logicopslab/JenkinsAutomation.git'
+			}
+		}
+		
+	stage('First Stage') {
 		    steps {
          // send build started notifications
          slackSend (color: '#00FF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
 			   echo "I am in First stage"
 			}
 		}
+		
         stage('Second Stage') {
 		    steps {
 			   echo "I am in Second stage"
 			}
 		}
+		
         stage('Pre Final Stage') {
 		    steps {
 			   echo "I am in Pre Final stage"
 			}
 		}
-	      stage('Final Stage') {
+		
+	stage('Final Stage') {
 		    steps {
 			   echo "I am in Final stage"
 			}
