@@ -1,26 +1,21 @@
 pipeline {
   agent any
     stages {
-    	stage('Git CheckOut') {
-	      steps {
-			  git branch: 'main', credentialsId: 'My private token login creds', url: 'https://github.com/logicopslab/JenkinsAutomation.git'
-		    }
-		}
-		
 	stage('First Stage') {
 	      steps {
 	      	script {
 		try {
-                          // send build started notifications
-        		  slackSend (channel: "#jenkinsbuildstatus", message: "Build : ${env.JOB_Name} started! In First Stage! ${env.BUILD_URL}", timestamp:slackResponse.ts)
-			  bat 'echo "I am in First stage"'
+                 // send build started notifications
+        		 slackSend (channel: "#jenkinsbuildstatus", color: '#00FF00', message: "Build : ${env.JOB_Name} started! In First Stage. ${env.BUILD_URL}")
+			    // bat 'echo "I am in First stage"'
+			    asdasdas
 		     }
 			
 	        catch(Exception e)
 	             {
 		         bat 'echo "Job Failed"'
 		         currentBuild.result = "FAILURE"
-		         slackSend (channel: "#jenkinsbuildstatus", message: "Build : ${env.JOB_Name} FAILED! Kindly troubleshoot ${env.BUILD_URL}", timestamp:slackResponse.ts)
+		         slackSend (channel: "#jenkinsbuildstatus", color: '#FF0000', message: "Build : ${env.JOB_Name} FAILED! Kindly troubleshoot! ${env.BUILD_URL}")
 	             }
 			}
 		
