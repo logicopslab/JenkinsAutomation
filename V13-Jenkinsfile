@@ -11,12 +11,12 @@ pipeline {
 		}
         stage('Clean and Install') {
             steps {
-                bat 'mvn clean install'
+                sh 'mvn clean install'
             }
         }
         stage ('Package'){
             steps {
-                bat 'mvn package'
+                sh 'mvn package'
              }
         }
 	stage ('Server'){
